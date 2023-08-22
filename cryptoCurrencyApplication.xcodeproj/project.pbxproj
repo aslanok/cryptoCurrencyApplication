@@ -20,6 +20,9 @@
 		FAE1C7742A9559C40005B011 /* FetchCoinDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7732A9559C40005B011 /* FetchCoinDataInteractor.swift */; };
 		FAE1C7792A955BE90005B011 /* MainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7782A955BE90005B011 /* MainPagePresenter.swift */; };
 		FAE1C77B2A955BFB0005B011 /* MainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C77A2A955BFB0005B011 /* MainPageRouter.swift */; };
+		FAE1C77E2A9560AC0005B011 /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C77D2A9560AC0005B011 /* DetailPageViewController.swift */; };
+		FAE1C7802A9560B90005B011 /* DetailPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C77F2A9560B90005B011 /* DetailPageRouter.swift */; };
+		FAE1C7822A9560C60005B011 /* DetailPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7812A9560C60005B011 /* DetailPagePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		FAE1C7732A9559C40005B011 /* FetchCoinDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCoinDataInteractor.swift; sourceTree = "<group>"; };
 		FAE1C7782A955BE90005B011 /* MainPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPagePresenter.swift; sourceTree = "<group>"; };
 		FAE1C77A2A955BFB0005B011 /* MainPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageRouter.swift; sourceTree = "<group>"; };
+		FAE1C77D2A9560AC0005B011 /* DetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageViewController.swift; sourceTree = "<group>"; };
+		FAE1C77F2A9560B90005B011 /* DetailPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageRouter.swift; sourceTree = "<group>"; };
+		FAE1C7812A9560C60005B011 /* DetailPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPagePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,7 @@
 		FAE1C7502A9555CB0005B011 /* cryptoCurrencyApplication */ = {
 			isa = PBXGroup;
 			children = (
+				FAE1C77C2A9560980005B011 /* DetailPage */,
 				FAE1C7752A955BAA0005B011 /* MainPage */,
 				FAE1C7702A9558B00005B011 /* Entity */,
 				FAE1C76F2A9558A40005B011 /* Interactor */,
@@ -116,6 +123,16 @@
 				FAE1C77A2A955BFB0005B011 /* MainPageRouter.swift */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		FAE1C77C2A9560980005B011 /* DetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				FAE1C77D2A9560AC0005B011 /* DetailPageViewController.swift */,
+				FAE1C77F2A9560B90005B011 /* DetailPageRouter.swift */,
+				FAE1C7812A9560C60005B011 /* DetailPagePresenter.swift */,
+			);
+			path = DetailPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +212,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE1C7822A9560C60005B011 /* DetailPagePresenter.swift in Sources */,
+				FAE1C7802A9560B90005B011 /* DetailPageRouter.swift in Sources */,
+				FAE1C77E2A9560AC0005B011 /* DetailPageViewController.swift in Sources */,
 				FAE1C7562A9555CB0005B011 /* MainPageViewController.swift in Sources */,
 				FAE1C7522A9555CB0005B011 /* AppDelegate.swift in Sources */,
 				FAE1C77B2A955BFB0005B011 /* MainPageRouter.swift in Sources */,

@@ -9,11 +9,12 @@ import Foundation
 
 protocol MainPagePresentation{
     func fetchData()
+    func openCoinDetail(coin : Coin)
 }
 
 class MainPagePresenter : MainPagePresentation, FetchCoinDataInteractorOutput{
     
-    internal var output : MainPageViewContract
+    internal var output : MainPageViewContract!
     private var router : MainPageRouting
     private var fetchCoinDataInteractor : FetchCoinDataInteractorInput
     
@@ -33,6 +34,10 @@ class MainPagePresenter : MainPagePresentation, FetchCoinDataInteractorOutput{
     
     func setFetchCoinDataFailed(error: String) {
         
+    }
+    
+    func openCoinDetail(coin: Coin) {
+        router.presentDetailPage(from: output, coin: coin)
     }
     
     

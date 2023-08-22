@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MainPageViewContract{
+protocol MainPageViewContract : UIViewController{
     func displayCoinData(result : CryptoModel)
 }
 
@@ -110,7 +110,7 @@ extension MainPageViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.openCoinDetail(index: indexPath.row)
+        presenter?.openCoinDetail(coin : coinDataList[indexPath.row] )
     }
     
     
