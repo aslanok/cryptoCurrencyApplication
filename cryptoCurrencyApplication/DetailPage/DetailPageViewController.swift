@@ -29,7 +29,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
 
         chartView.leftAxis.drawGridLinesEnabled = false
         chartView.leftAxis.drawAxisLineEnabled = false
-        chartView.leftAxis.drawLabelsEnabled = true
+        chartView.leftAxis.drawLabelsEnabled = false
         chartView.leftAxis.labelCount = 3
         chartView.leftAxis.labelTextColor = .gray
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -165,6 +165,39 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         return label
     }()
     
+    private lazy var leftTopLimitGraphLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "$" + _coin.getHighestSparkLine().formatWithCommas()
+        label.textColor = .Theme.grayTextColor
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        return label
+    }()
+    
+    private lazy var leftMidLimitGraphLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "$" + _coin.getMiddleSparkLine().formatWithCommas()
+        label.textColor = .Theme.grayTextColor
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        return label
+    }()
+    
+    private lazy var leftBottomLimitGraphLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "$" + _coin.getLowestSparkLine().formatWithCommas()
+        label.textColor = .Theme.grayTextColor
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        return label
+    }()
+    
     //highPrice ile highLabel'i birleştir
     
     init(coin : CoinDataModel){
@@ -224,9 +257,24 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         
         view.addSubview(coinGraph)
         coinGraph.topAnchor.constraint(equalTo: coinChangePriceLabel.bottomAnchor, constant: 40).isActive = true
-        coinGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        coinGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60).isActive = true
         coinGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        coinGraph.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        coinGraph.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        
+        view.addSubview(leftTopLimitGraphLabel)
+        leftTopLimitGraphLabel.topAnchor.constraint(equalTo: coinGraph.topAnchor, constant: 20).isActive = true
+        leftTopLimitGraphLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        leftTopLimitGraphLabel.trailingAnchor.constraint(equalTo: coinGraph.leadingAnchor, constant: -3).isActive = true
+        
+        view.addSubview(leftMidLimitGraphLabel)
+        leftMidLimitGraphLabel.centerYAnchor.constraint(equalTo: coinGraph.centerYAnchor).isActive = true
+        leftMidLimitGraphLabel.leadingAnchor.constraint(equalTo: leftTopLimitGraphLabel.leadingAnchor).isActive = true
+        leftMidLimitGraphLabel.trailingAnchor.constraint(equalTo: leftTopLimitGraphLabel.trailingAnchor).isActive = true
+        
+        view.addSubview(leftBottomLimitGraphLabel)
+        leftBottomLimitGraphLabel.topAnchor.constraint(equalTo: coinGraph.bottomAnchor, constant: -35).isActive = true
+        leftBottomLimitGraphLabel.leadingAnchor.constraint(equalTo: leftTopLimitGraphLabel.leadingAnchor).isActive = true
+        leftBottomLimitGraphLabel.trailingAnchor.constraint(equalTo: leftTopLimitGraphLabel.trailingAnchor).isActive = true
         
     }
     
@@ -250,6 +298,13 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
             dataSet.colors = [.Theme.failRedColor]
             //dataSet.fillColor = .Theme.failRedColor
         }
+        //print("coinPrice : \(_coin.price.formatAsNumberWithCommas())")
+        if highPriceLabel.text?.count ?? 0 > 6 {
+            leftTopLimitGraphLabel.text = "$" + _coin.getHighestSparkLine().removeDecimalPart()
+            leftBottomLimitGraphLabel.text = "$" + _coin.getLowestSparkLine().removeDecimalPart()
+            leftMidLimitGraphLabel.text = "$" + _coin.getMiddleSparkLine().removeDecimalPart()
+        }
+
         /*
         let dataEntries = createChartDataEntries(from: _coin.getSparkLineDouble())
         let dataSet = LineChartDataSet(entries: dataEntries)
