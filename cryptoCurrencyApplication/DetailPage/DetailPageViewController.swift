@@ -21,8 +21,41 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         let chartView = LineChartView()
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.drawAxisLineEnabled = false
+        chartView.xAxis.drawLabelsEnabled = false
         chartView.xAxis.drawGridLinesEnabled = false
+        
         chartView.leftAxis.drawGridLinesEnabled = false
+        chartView.leftAxis.drawAxisLineEnabled = false
+        chartView.leftAxis.drawLabelsEnabled = true
+        chartView.leftAxis.labelCount = 3
+        chartView.leftAxis.labelTextColor = .gray
+        chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        chartView.rightAxis.drawGridLinesEnabled = false
+        chartView.rightAxis.drawAxisLineEnabled = false
+        chartView.rightAxis.drawLabelsEnabled = false
+        
+        let topLimitLine = ChartLimitLine(limit: 232)
+        topLimitLine.lineColor = .lightGray
+        topLimitLine.lineWidth = 1.0
+        
+        let middleLimitLine = ChartLimitLine(limit: 228)
+        middleLimitLine.lineColor = .lightGray
+        middleLimitLine.lineWidth = 1.0
+                
+        let bottomLimitLine = ChartLimitLine(limit: 224)
+        bottomLimitLine.lineColor = .lightGray
+        bottomLimitLine.lineWidth = 1.0
+                
+        chartView.leftAxis.addLimitLine(topLimitLine)
+        chartView.leftAxis.addLimitLine(middleLimitLine)
+        chartView.leftAxis.addLimitLine(bottomLimitLine)
+        
+        chartView.legend.enabled = false
+        
+        let marker = chartView.marker
+        
         return chartView
     }()
     
@@ -178,31 +211,18 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         coinGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         coinGraph.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        let dataEntries: [ChartDataEntry] = [
-                    // Create ChartDataEntry instances for each data point
-                    // You can loop through your "sparkline" array and create entries here
-                    // For simplicity, I'll create dummy entries here
-                    ChartDataEntry(x: 1.0, y: 38.0497236257737307080000),
-                    ChartDataEntry(x: 2.0, y: 38.1243298434867449000000),
-                    ChartDataEntry(x: 3.0, y: 40),
-                    ChartDataEntry(x: 4.0, y: 41),
-                    ChartDataEntry(x: 5.0, y: 37),
-                    ChartDataEntry(x: 6.0, y: 42),
-                    ChartDataEntry(x: 7.0, y: 21)
-                ]
-                
-        let dataSet = LineChartDataSet(entries: dataEntries, label: "Sparkline Data")
+        let dataEntries = createChartDataEntries(from: _coin.sparkline)
+        let dataSet = LineChartDataSet(entries: dataEntries, label: "")
+        dataSet.colors = [.Theme.successGreenColor]
         dataSet.drawCirclesEnabled = false
         dataSet.drawValuesEnabled = false
-        dataSet.mode = .cubicBezier
+        dataSet.mode = .horizontalBezier
         dataSet.lineWidth = 2.0
-        dataSet.drawFilledEnabled = true
+        dataSet.drawFilledEnabled = false
+        dataSet.highlightColor = .lightGray
         
         let data = LineChartData(dataSet: dataSet)
         coinGraph.data = data
-
-        
-        
     }
     
     override func viewDidLoad() {
@@ -213,6 +233,15 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         presenter?.back()
     }
     
-    
+    func createChartDataEntries(from values: [String]) -> [ChartDataEntry] {
+        var entries: [ChartDataEntry] = []
+        for (index, stringValue) in values.enumerated() {
+            if let doubleValue = Double(stringValue) {
+                let entry = ChartDataEntry(x: Double(index), y: doubleValue)
+                entries.append(entry)
+            }
+        }
+        return entries
+    }
     
 }

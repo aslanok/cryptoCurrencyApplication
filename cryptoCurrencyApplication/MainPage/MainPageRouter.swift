@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol MainPageRouting{
     func presentDetailPage(from view : UIViewController?, coin : Coin)
