@@ -67,4 +67,13 @@ class CoinDataModel{
     func getCalculatedChangedPrice() -> Double {
         return (Double(self.price) ?? 0.0) * (Double(self.change) ?? 0.0) / 100
     }
+    
+    func getChangePercentQuantity() -> String{
+        if change.first == "-"{
+            return "\(self.change)% (-$\(getCalculatedChangedPrice().magnitude.formatWithCommas()))"
+        } else {
+            return "\(self.change)% (+$\(getCalculatedChangedPrice().formatWithCommas()))"
+        }
+    }
+    
 }

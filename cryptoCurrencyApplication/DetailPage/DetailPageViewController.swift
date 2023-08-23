@@ -16,6 +16,8 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
     
     var presenter : DetailPagePresentation?
     private var _coin : CoinDataModel
+    private var dataEntries : [ChartDataEntry] = [ChartDataEntry]()
+    private var dataSet = LineChartDataSet()
     
     private lazy var coinGraph : LineChartView = {
         let chartView = LineChartView()
@@ -31,11 +33,11 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         chartView.leftAxis.labelCount = 3
         chartView.leftAxis.labelTextColor = .gray
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        
+
         chartView.rightAxis.drawGridLinesEnabled = false
         chartView.rightAxis.drawAxisLineEnabled = false
         chartView.rightAxis.drawLabelsEnabled = false
-        
+
         let topLimitLine = ChartLimitLine(limit: _coin.getHighestSparkLine())
         topLimitLine.lineColor = .lightGray
         topLimitLine.lineWidth = 1.0
@@ -51,10 +53,25 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         chartView.leftAxis.addLimitLine(topLimitLine)
         chartView.leftAxis.addLimitLine(middleLimitLine)
         chartView.leftAxis.addLimitLine(bottomLimitLine)
-        
+
         chartView.legend.enabled = false
+        chartView.isUserInteractionEnabled = false
         
-        let marker = chartView.marker
+        dataEntries = createChartDataEntries(from: _coin.getSparkLineDouble())
+        dataSet = LineChartDataSet(entries: dataEntries)
+        dataSet.colors = [.Theme.successGreenColor]
+        dataSet.drawCirclesEnabled = false
+        dataSet.drawValuesEnabled = false
+        dataSet.mode = .horizontalBezier
+        dataSet.lineWidth = 2.0
+        dataSet.drawFilledEnabled = false
+        //dataSet.drawFilledEnabled = true
+        //dataSet.fillColor = .Theme.successGreenColor
+        //dataSet.highlightColor = .lightGray
+        dataSet.highlightEnabled = false
+        
+        let data = LineChartData(dataSet: dataSet)
+        chartView.data = data
         
         return chartView
     }()
@@ -63,7 +80,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = _coin.symbol
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .Theme.grayTextColor
         return label
     }()
@@ -72,7 +89,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = _coin.name
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .Theme.navyBlueTextColor
         return label
     }()
@@ -90,7 +107,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "CURRENT PRICE"
         label.textColor = .Theme.navyBlueTextColor
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     
@@ -99,7 +116,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = _coin.price
         label.textColor = .Theme.navyBlueTextColor
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         return label
     }()
     
@@ -108,7 +125,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "High:"
         label.textColor = .Theme.navyBlueTextColor
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
@@ -117,7 +134,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "62,903.21"
         label.textColor = .Theme.successGreenColor
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
@@ -126,7 +143,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Low:"
         label.textColor = .Theme.navyBlueTextColor
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
@@ -135,7 +152,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "59,213.19"
         label.textColor = .Theme.failRedColor
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
@@ -144,7 +161,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = _coin.change
         label.textColor = .Theme.successGreenColor
-        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     
@@ -209,28 +226,53 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         coinGraph.topAnchor.constraint(equalTo: coinChangePriceLabel.bottomAnchor, constant: 40).isActive = true
         coinGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         coinGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        coinGraph.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        coinGraph.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpDatas()
+    }
+    
+    @objc func backButtonTapped(){
+        presenter?.back()
+    }
+    
+    func setUpDatas(){
+        coinPriceLabel.text = "$"+self._coin.getFormattedPrice()
+        highPriceLabel.text = _coin.getHighestSparkLine().formatWithCommas()
+        lowPriceLabel.text = _coin.getLowestSparkLine().formatWithCommas()
+        coinChangePriceLabel.text = _coin.getChangePercentQuantity()
+        
+        if _coin.change.first == "-"{
+            coinChangePriceLabel.textColor = .Theme.failRedColor
+            dataSet.colors = [.Theme.failRedColor]
+            //dataSet.fillColor = .Theme.failRedColor
+        }
+        /*
         let dataEntries = createChartDataEntries(from: _coin.getSparkLineDouble())
-        let dataSet = LineChartDataSet(entries: dataEntries, label: "")
+        let dataSet = LineChartDataSet(entries: dataEntries)
         dataSet.colors = [.Theme.successGreenColor]
         dataSet.drawCirclesEnabled = false
         dataSet.drawValuesEnabled = false
         dataSet.mode = .horizontalBezier
         dataSet.lineWidth = 2.0
         dataSet.drawFilledEnabled = false
-        dataSet.highlightColor = .lightGray
+        //dataSet.drawFilledEnabled = true
+        //dataSet.fillColor = .Theme.successGreenColor
+        //dataSet.highlightColor = .lightGray
+        dataSet.highlightEnabled = false
+        
+        if _coin.change.first == "-"{
+            coinChangePriceLabel.textColor = .Theme.failRedColor
+            dataSet.colors = [.Theme.failRedColor]
+            //dataSet.fillColor = .Theme.failRedColor
+        }
         
         let data = LineChartData(dataSet: dataSet)
         coinGraph.data = data
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    @objc func backButtonTapped(){
-        presenter?.back()
+         */
     }
     
     func createChartDataEntries(from values: [Double]) -> [ChartDataEntry] {
