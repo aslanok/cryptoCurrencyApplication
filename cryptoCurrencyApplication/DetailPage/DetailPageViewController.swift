@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Charts
 
 protocol DetailPageViewContract : UIViewController{
     
@@ -15,6 +16,15 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
     
     var presenter : DetailPagePresentation?
     private var _coin : Coin
+    
+    private lazy var coinGraph : LineChartView = {
+        let chartView = LineChartView()
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.drawGridLinesEnabled = false
+        chartView.leftAxis.drawGridLinesEnabled = false
+        return chartView
+    }()
     
     private lazy var nameTitleLabel : UILabel = {
         let label = UILabel()
@@ -161,6 +171,37 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         view.addSubview(lowLabel)
         lowLabel.topAnchor.constraint(equalTo: lowPriceLabel.topAnchor).isActive = true
         lowLabel.trailingAnchor.constraint(equalTo: lowPriceLabel.leadingAnchor, constant: -8).isActive = true
+        
+        view.addSubview(coinGraph)
+        coinGraph.topAnchor.constraint(equalTo: coinChangePriceLabel.bottomAnchor, constant: 40).isActive = true
+        coinGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        coinGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        coinGraph.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        let dataEntries: [ChartDataEntry] = [
+                    // Create ChartDataEntry instances for each data point
+                    // You can loop through your "sparkline" array and create entries here
+                    // For simplicity, I'll create dummy entries here
+                    ChartDataEntry(x: 1.0, y: 38.0497236257737307080000),
+                    ChartDataEntry(x: 2.0, y: 38.1243298434867449000000),
+                    ChartDataEntry(x: 3.0, y: 40),
+                    ChartDataEntry(x: 4.0, y: 41),
+                    ChartDataEntry(x: 5.0, y: 37),
+                    ChartDataEntry(x: 6.0, y: 42),
+                    ChartDataEntry(x: 7.0, y: 21)
+                ]
+                
+        let dataSet = LineChartDataSet(entries: dataEntries, label: "Sparkline Data")
+        dataSet.drawCirclesEnabled = false
+        dataSet.drawValuesEnabled = false
+        dataSet.mode = .cubicBezier
+        dataSet.lineWidth = 2.0
+        dataSet.drawFilledEnabled = true
+        
+        let data = LineChartData(dataSet: dataSet)
+        coinGraph.data = data
+
+        
         
     }
     
