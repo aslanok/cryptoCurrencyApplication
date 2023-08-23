@@ -22,8 +22,6 @@ class DetailPageRouter : DetailPageRouting{
         presenter.output = view
         
         view.modalPresentationStyle = .fullScreen
-        
-        
         return view
     }
     
