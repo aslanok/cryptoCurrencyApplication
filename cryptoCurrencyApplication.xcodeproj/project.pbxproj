@@ -11,6 +11,8 @@
 		FA37DE762A9657DC000CE09D /* CoinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE752A9657DC000CE09D /* CoinDataModel.swift */; };
 		FA37DE782A9662AB000CE09D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE772A9662AB000CE09D /* String+Extensions.swift */; };
 		FA37DE7A2A966F47000CE09D /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE792A966F47000CE09D /* Double+Extensions.swift */; };
+		FA37DE7C2A96A2DD000CE09D /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE7B2A96A2DD000CE09D /* FilterTableViewCell.swift */; };
+		FA37DE7F2A96BCE9000CE09D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE7E2A96BCE9000CE09D /* Enums.swift */; };
 		FAE1C7522A9555CB0005B011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7512A9555CB0005B011 /* AppDelegate.swift */; };
 		FAE1C7542A9555CB0005B011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */; };
 		FAE1C7562A9555CB0005B011 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7552A9555CB0005B011 /* MainPageViewController.swift */; };
@@ -34,6 +36,8 @@
 		FA37DE752A9657DC000CE09D /* CoinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDataModel.swift; sourceTree = "<group>"; };
 		FA37DE772A9662AB000CE09D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		FA37DE792A966F47000CE09D /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		FA37DE7B2A96A2DD000CE09D /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		FA37DE7E2A96BCE9000CE09D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		FAE1C74E2A9555CB0005B011 /* cryptoCurrencyApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoCurrencyApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE1C7512A9555CB0005B011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +93,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FA37DE7D2A96BC52000CE09D /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				FA37DE7E2A96BCE9000CE09D /* Enums.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		FAE1C7452A9555CB0005B011 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +122,7 @@
 		FAE1C7502A9555CB0005B011 /* cryptoCurrencyApplication */ = {
 			isa = PBXGroup;
 			children = (
+				FA37DE7D2A96BC52000CE09D /* Enums */,
 				FA37DE742A9657C8000CE09D /* Models */,
 				FAE1C77C2A9560980005B011 /* DetailPage */,
 				FAE1C7752A955BAA0005B011 /* MainPage */,
@@ -158,6 +171,7 @@
 				FAE1C7682A95572F0005B011 /* RankingListTableViewCell.swift */,
 				FAE1C7782A955BE90005B011 /* MainPagePresenter.swift */,
 				FAE1C77A2A955BFB0005B011 /* MainPageRouter.swift */,
+				FA37DE7B2A96A2DD000CE09D /* FilterTableViewCell.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -295,6 +309,7 @@
 				FAE1C7802A9560B90005B011 /* DetailPageRouter.swift in Sources */,
 				FAE1C77E2A9560AC0005B011 /* DetailPageViewController.swift in Sources */,
 				FAE1C7562A9555CB0005B011 /* MainPageViewController.swift in Sources */,
+				FA37DE7F2A96BCE9000CE09D /* Enums.swift in Sources */,
 				FAE1C7522A9555CB0005B011 /* AppDelegate.swift in Sources */,
 				FAE1C77B2A955BFB0005B011 /* MainPageRouter.swift in Sources */,
 				FAE1C7542A9555CB0005B011 /* SceneDelegate.swift in Sources */,
@@ -303,6 +318,7 @@
 				FAE1C7742A9559C40005B011 /* FetchCoinDataInteractor.swift in Sources */,
 				FAE1C7792A955BE90005B011 /* MainPagePresenter.swift in Sources */,
 				FAE1C7672A95570A0005B011 /* UIColor+Extensions.swift in Sources */,
+				FA37DE7C2A96A2DD000CE09D /* FilterTableViewCell.swift in Sources */,
 				FAE1C7722A9558D80005B011 /* CryptoResponse.swift in Sources */,
 				FAE1C7692A95572F0005B011 /* RankingListTableViewCell.swift in Sources */,
 			);

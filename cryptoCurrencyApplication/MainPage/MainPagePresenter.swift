@@ -30,7 +30,7 @@ class MainPagePresenter : MainPagePresentation, FetchCoinDataInteractorOutput{
     
     func setFetchCoinDataSuccess(result: CryptoResponse) {
         let modelledList = result.data.coins.map{ coin -> CoinDataModel in
-            CoinDataModel(symbol: coin.symbol, name: coin.name, iconURL: coin.iconURL, price: coin.price, listedAt: coin.listedAt, change: coin.change, the24HVolume: coin.the24HVolume, sparkLine: coin.sparkline)
+            CoinDataModel(symbol: coin.symbol, name: coin.name, iconURL: coin.iconURL, price: coin.price, listedAt: coin.listedAt, change: coin.change, the24HVolume: coin.the24HVolume,marketCap: coin.marketCap, sparkLine: coin.sparkline)
         }
         output.displayCoinData(result: modelledList)
     }

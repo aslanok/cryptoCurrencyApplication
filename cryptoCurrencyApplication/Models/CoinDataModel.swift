@@ -16,11 +16,12 @@ class CoinDataModel{
     let listedAt : Int
     let change : String
     let the24HVolume : String
+    let marketCap : String
     let sparkLine : [String]
     
     private var _sparkLineDouble : [Double] = [Double]()
     
-    init(symbol : String, name : String, iconURL : String, price : String, listedAt : Int, change : String, the24HVolume : String, sparkLine : [String]){
+    init(symbol : String, name : String, iconURL : String, price : String, listedAt : Int, change : String, the24HVolume : String,marketCap : String, sparkLine : [String]){
         self.symbol = symbol
         self.name = name
         self.iconURL = iconURL
@@ -28,8 +29,25 @@ class CoinDataModel{
         self.listedAt = listedAt
         self.change = change
         self.the24HVolume = the24HVolume
+        self.marketCap = marketCap
         self.sparkLine = sparkLine
         setSparkLineDouble()
+    }
+    
+    func getPrice() -> Double{
+        return Double(price) ?? 0
+    }
+    
+    func getMarketCap() -> Double{
+        return Double(marketCap) ?? 0
+    }
+    
+    func getVolume24h()->Double{
+        return Double(the24HVolume) ?? 0
+    }
+    
+    func getChange() -> Double {
+        return Double(change) ?? 0
     }
     
     func setSparkLineDouble(){
