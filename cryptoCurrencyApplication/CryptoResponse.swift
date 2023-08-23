@@ -1,5 +1,5 @@
 //
-//  CryptoModel.swift
+//  CryptoResponse.swift
 //  cryptoPosApp
 //
 //  Created by MacBook on 22.08.2023.
@@ -7,20 +7,20 @@
 
 import Foundation
 
-// MARK: - CryptoModel
-struct CryptoModel: Codable {
+// MARK: - CryptoResponse
+struct CryptoResponse: Decodable {
     let status: String
     let data: DataClass
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
+struct DataClass: Decodable {
     let stats: Stats
     let coins: [Coin]
 }
 
 // MARK: - Coin
-struct Coin: Codable {
+struct Coin: Decodable {
     let uuid, symbol, name: String
     let color: String?
     let iconURL: String
@@ -44,7 +44,7 @@ struct Coin: Codable {
 }
 
 // MARK: - Stats
-struct Stats: Codable {
+struct Stats: Decodable {
     let total, totalCoins, totalMarkets, totalExchanges: Int
     let totalMarketCap, total24HVolume: String
 

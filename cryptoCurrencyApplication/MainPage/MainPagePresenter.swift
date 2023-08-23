@@ -9,7 +9,7 @@ import Foundation
 
 protocol MainPagePresentation{
     func fetchData()
-    func openCoinDetail(coin : Coin)
+    func openCoinDetail(coin : CoinDataModel)
 }
 
 class MainPagePresenter : MainPagePresentation, FetchCoinDataInteractorOutput{
@@ -28,15 +28,18 @@ class MainPagePresenter : MainPagePresentation, FetchCoinDataInteractorOutput{
         fetchCoinDataInteractor.execute()
     }
     
-    func setFetchCoinDataSuccess(result: CryptoModel) {
-        output.displayCoinData(result: result)
+    func setFetchCoinDataSuccess(result: CryptoResponse) {
+        let modelledList = result.data.coins.map{ coin -> CoinDataModel in
+            CoinDataModel(symbol: coin.symbol, name: coin.name, iconURL: coin.iconURL, price: coin.price, listedAt: coin.listedAt, change: coin.change, the24HVolume: coin.the24HVolume, sparkLine: coin.sparkline)
+        }
+        output.displayCoinData(result: modelledList)
     }
     
     func setFetchCoinDataFailed(error: String) {
         
     }
     
-    func openCoinDetail(coin: Coin) {
+    func openCoinDetail(coin: CoinDataModel) {
         router.presentDetailPage(from: output, coin: coin)
     }
     

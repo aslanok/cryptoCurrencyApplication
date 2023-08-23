@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 protocol MainPageRouting{
-    func presentDetailPage(from view : UIViewController?, coin : Coin)
+    func presentDetailPage(from view : UIViewController?, coin : CoinDataModel)
 }
 
 class MainPageRouter : MainPageRouting{
@@ -25,7 +25,7 @@ class MainPageRouter : MainPageRouting{
         return view
     }
     
-    func presentDetailPage(from view: UIViewController?, coin : Coin) {
+    func presentDetailPage(from view: UIViewController?, coin : CoinDataModel) {
         let router = DetailPageRouter()
         view?.present(router.viewController(coin: coin), animated: true)
     }

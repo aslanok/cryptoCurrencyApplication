@@ -15,7 +15,7 @@ protocol DetailPageViewContract : UIViewController{
 class DetailPageViewController : UIViewController, DetailPageViewContract{
     
     var presenter : DetailPagePresentation?
-    private var _coin : Coin
+    private var _coin : CoinDataModel
     
     private lazy var coinGraph : LineChartView = {
         let chartView = LineChartView()
@@ -24,7 +24,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         chartView.xAxis.drawAxisLineEnabled = false
         chartView.xAxis.drawLabelsEnabled = false
         chartView.xAxis.drawGridLinesEnabled = false
-        
+
         chartView.leftAxis.drawGridLinesEnabled = false
         chartView.leftAxis.drawAxisLineEnabled = false
         chartView.leftAxis.drawLabelsEnabled = true
@@ -36,18 +36,18 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         chartView.rightAxis.drawAxisLineEnabled = false
         chartView.rightAxis.drawLabelsEnabled = false
         
-        let topLimitLine = ChartLimitLine(limit: 232)
+        let topLimitLine = ChartLimitLine(limit: _coin.getHighestSparkLine())
         topLimitLine.lineColor = .lightGray
         topLimitLine.lineWidth = 1.0
-        
-        let middleLimitLine = ChartLimitLine(limit: 228)
+
+        let middleLimitLine = ChartLimitLine(limit: _coin.getMiddleSparkLine())
         middleLimitLine.lineColor = .lightGray
         middleLimitLine.lineWidth = 1.0
-                
-        let bottomLimitLine = ChartLimitLine(limit: 224)
+
+        let bottomLimitLine = ChartLimitLine(limit: _coin.getLowestSparkLine())
         bottomLimitLine.lineColor = .lightGray
         bottomLimitLine.lineWidth = 1.0
-                
+
         chartView.leftAxis.addLimitLine(topLimitLine)
         chartView.leftAxis.addLimitLine(middleLimitLine)
         chartView.leftAxis.addLimitLine(bottomLimitLine)
@@ -150,7 +150,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
     
     //highPrice ile highLabel'i birleştir
     
-    init(coin : Coin){
+    init(coin : CoinDataModel){
         self._coin = coin
         super.init(nibName: nil, bundle: nil)
     }
@@ -211,7 +211,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         coinGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         coinGraph.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
-        let dataEntries = createChartDataEntries(from: _coin.sparkline)
+        let dataEntries = createChartDataEntries(from: _coin.getSparkLineDouble())
         let dataSet = LineChartDataSet(entries: dataEntries, label: "")
         dataSet.colors = [.Theme.successGreenColor]
         dataSet.drawCirclesEnabled = false
@@ -233,13 +233,11 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         presenter?.back()
     }
     
-    func createChartDataEntries(from values: [String]) -> [ChartDataEntry] {
+    func createChartDataEntries(from values: [Double]) -> [ChartDataEntry] {
         var entries: [ChartDataEntry] = []
-        for (index, stringValue) in values.enumerated() {
-            if let doubleValue = Double(stringValue) {
-                let entry = ChartDataEntry(x: Double(index), y: doubleValue)
-                entries.append(entry)
-            }
+        for (index, value) in values.enumerated() {
+            let entry = ChartDataEntry(x: Double(index), y: value)
+            entries.append(entry)
         }
         return entries
     }

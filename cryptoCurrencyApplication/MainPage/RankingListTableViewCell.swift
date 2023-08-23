@@ -44,7 +44,8 @@ class RankingListTableViewCell : UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Ethereum"
         label.textColor = .Theme.navyBlueTextColor
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return label
     }()
     
@@ -53,7 +54,7 @@ class RankingListTableViewCell : UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .Theme.navyBlueTextColor
         label.text = "$2,147.53"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return label
     }()
     
@@ -62,7 +63,7 @@ class RankingListTableViewCell : UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .Theme.successGreenColor
         label.text = "+0.02% (+$0.243)"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
@@ -90,12 +91,13 @@ class RankingListTableViewCell : UITableViewCell {
         assetImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
         cardView.addSubview(assetName)
-        assetName.bottomAnchor.constraint(equalTo: cardView.centerYAnchor, constant: -10).isActive = true
+        assetName.bottomAnchor.constraint(equalTo: cardView.centerYAnchor, constant: -6).isActive = true
         assetName.leadingAnchor.constraint(equalTo: assetImage.trailingAnchor, constant: 10).isActive = true
 
         cardView.addSubview(assetFullName)
-        assetFullName.topAnchor.constraint(equalTo: cardView.centerYAnchor, constant: 10).isActive = true
+        assetFullName.topAnchor.constraint(equalTo: cardView.centerYAnchor, constant: 6).isActive = true
         assetFullName.leadingAnchor.constraint(equalTo: assetName.leadingAnchor).isActive = true
+        assetFullName.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
         cardView.addSubview(assetPriceLabel)
         assetPriceLabel.bottomAnchor.constraint(equalTo: cardView.centerYAnchor, constant: -5).isActive = true
@@ -107,13 +109,18 @@ class RankingListTableViewCell : UITableViewCell {
         
     }
     
-    func setupCell(coin : Coin){
-        self.assetImage.sd_setImage(with: URL(string: coin.iconURL.dropLast(3)+"png"))
+    func setupCell(coin : CoinDataModel){
+        self.assetImage.sd_setImage(with: coin.getIconImageURL())
         self.assetName.text = coin.symbol
         self.assetFullName.text = coin.name
-        self.assetPriceLabel.text = coin.price
-        self.assetPriceChangeLabel.text = coin.change
+        self.assetPriceLabel.text = "$"+coin.getFormattedPrice()
+        if coin.change.first == "-"{
+            assetPriceChangeLabel.textColor = .Theme.failRedColor
+            assetPriceChangeLabel.text = coin.change + "% (-$\(coin.getCalculatedChangedPrice().formatWithCommas()))"
+        } else {
+            assetPriceChangeLabel.textColor = .Theme.successGreenColor
+            assetPriceChangeLabel.text = "+"+coin.change+"% (+$\(coin.getCalculatedChangedPrice().formatWithCommas()))"
+        }
     }
-     
 
 }

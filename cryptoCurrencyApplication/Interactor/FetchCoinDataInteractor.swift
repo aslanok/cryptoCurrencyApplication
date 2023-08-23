@@ -12,7 +12,7 @@ protocol FetchCoinDataInteractorInput{
 }
 
 protocol FetchCoinDataInteractorOutput{
-    func setFetchCoinDataSuccess(result : CryptoModel)
+    func setFetchCoinDataSuccess(result : CryptoResponse)
     func setFetchCoinDataFailed(error : String)
 }
 
@@ -27,15 +27,12 @@ class FetchCoinDataInteractor : FetchCoinDataInteractorInput{
             return
         }
         URLSession.shared.dataTask(with: url) { dataResponse, urlResponse, error in
-        if error == nil,
-        let data = dataResponse,
-        let resultData = try? JSONDecoder().decode(CryptoModel.self, from: data) {
-            self.output?.setFetchCoinDataSuccess(result: resultData)
-        } else {
-            self.output?.setFetchCoinDataFailed(error: error?.localizedDescription ?? "")
-        }
-    }.resume()
-
+            if error == nil,let data = dataResponse, let resultData = try? JSONDecoder().decode(CryptoResponse.self, from: data) {
+                self.output?.setFetchCoinDataSuccess(result: resultData)
+            } else {
+                self.output?.setFetchCoinDataFailed(error: error?.localizedDescription ?? "")
+            }
+        }.resume()
     }
     
     

@@ -8,12 +8,12 @@
 import UIKit
 
 protocol MainPageViewContract : UIViewController{
-    func displayCoinData(result : CryptoModel)
+    func displayCoinData(result : [CoinDataModel])
 }
 
 class MainPageViewController: UIViewController, MainPageViewContract {
     
-    private var coinDataList : [Coin] = [Coin]()
+    private var coinDataList : [CoinDataModel] = [CoinDataModel]()
     var presenter : MainPagePresentation?
     
     private lazy var rankingListLabel : UILabel = {
@@ -77,8 +77,8 @@ class MainPageViewController: UIViewController, MainPageViewContract {
         
     }
     
-    func displayCoinData(result: CryptoModel) {
-        coinDataList = result.data.coins
+    func displayCoinData(result: [CoinDataModel]) {
+        coinDataList = result
         DispatchQueue.main.async {
             self.rankingListTableView.reloadData()
         }

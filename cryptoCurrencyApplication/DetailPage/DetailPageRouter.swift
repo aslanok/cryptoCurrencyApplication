@@ -14,7 +14,7 @@ protocol DetailPageRouting{
 
 class DetailPageRouter : DetailPageRouting{
     
-    func viewController(coin : Coin) -> UIViewController{
+    func viewController(coin : CoinDataModel) -> UIViewController{
         let view = DetailPageViewController(coin: coin)
         let presenter = DetailPagePresenter(router: self, view: view)
         
