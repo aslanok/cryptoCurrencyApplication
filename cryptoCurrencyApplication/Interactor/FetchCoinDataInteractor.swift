@@ -20,19 +20,16 @@ class FetchCoinDataInteractor : FetchCoinDataInteractorInput{
     
     internal var output : FetchCoinDataInteractorOutput?
     
+    let endpointURL = "https://psp-merchantpanel-service-sandbox.ozanodeme.com.tr/api/v1/dummy/coins"
     func execute() {
-        let urlString = "https://psp-merchantpanel-service-sandbox.ozanodeme.com.tr/api/v1/dummy/coins"
-        guard let url = URL(string: urlString) else {
-            output?.setFetchCoinDataFailed(error: "url hatası")
-            return
-        }
-        URLSession.shared.dataTask(with: url) { dataResponse, urlResponse, error in
-            if error == nil,let data = dataResponse, let resultData = try? JSONDecoder().decode(CryptoResponse.self, from: data) {
-                self.output?.setFetchCoinDataSuccess(result: resultData)
-            } else {
-                self.output?.setFetchCoinDataFailed(error: error?.localizedDescription ?? "")
+        APIService.shared.request( endpointURL, type: CryptoResponse.self) { result in
+            switch result{
+            case .success(let data):
+                self.output?.setFetchCoinDataSuccess(result: data)
+            case .failure(let error):
+                self.output?.setFetchCoinDataFailed(error: error.errorDescription)
             }
-        }.resume()
+        }
     }
     
     
