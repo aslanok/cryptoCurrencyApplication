@@ -65,6 +65,9 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         dataSet.mode = .horizontalBezier
         dataSet.lineWidth = 2.0
         dataSet.drawFilledEnabled = false
+
+        // The options below are choices for filling under the graph's line.
+
         //dataSet.drawFilledEnabled = true
         //dataSet.fillColor = .Theme.successGreenColor
         //dataSet.highlightColor = .lightGray
@@ -198,7 +201,6 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         return label
     }()
     
-    //highPrice ile highLabel'i birleştir
     
     init(coin : CoinDataModel){
         self._coin = coin
@@ -296,38 +298,14 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         if _coin.change.first == "-"{
             coinChangePriceLabel.textColor = .Theme.failRedColor
             dataSet.colors = [.Theme.failRedColor]
-            //dataSet.fillColor = .Theme.failRedColor
         }
-        //print("coinPrice : \(_coin.price.formatAsNumberWithCommas())")
+
         if highPriceLabel.text?.count ?? 0 > 6 {
             leftTopLimitGraphLabel.text = "$" + _coin.getHighestSparkLine().removeDecimalPart()
             leftBottomLimitGraphLabel.text = "$" + _coin.getLowestSparkLine().removeDecimalPart()
             leftMidLimitGraphLabel.text = "$" + _coin.getMiddleSparkLine().removeDecimalPart()
         }
 
-        /*
-        let dataEntries = createChartDataEntries(from: _coin.getSparkLineDouble())
-        let dataSet = LineChartDataSet(entries: dataEntries)
-        dataSet.colors = [.Theme.successGreenColor]
-        dataSet.drawCirclesEnabled = false
-        dataSet.drawValuesEnabled = false
-        dataSet.mode = .horizontalBezier
-        dataSet.lineWidth = 2.0
-        dataSet.drawFilledEnabled = false
-        //dataSet.drawFilledEnabled = true
-        //dataSet.fillColor = .Theme.successGreenColor
-        //dataSet.highlightColor = .lightGray
-        dataSet.highlightEnabled = false
-        
-        if _coin.change.first == "-"{
-            coinChangePriceLabel.textColor = .Theme.failRedColor
-            dataSet.colors = [.Theme.failRedColor]
-            //dataSet.fillColor = .Theme.failRedColor
-        }
-        
-        let data = LineChartData(dataSet: dataSet)
-        coinGraph.data = data
-         */
     }
     
     func createChartDataEntries(from values: [Double]) -> [ChartDataEntry] {

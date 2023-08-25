@@ -11,10 +11,11 @@
 		FA37DE762A9657DC000CE09D /* CoinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE752A9657DC000CE09D /* CoinDataModel.swift */; };
 		FA37DE782A9662AB000CE09D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE772A9662AB000CE09D /* String+Extensions.swift */; };
 		FA37DE7A2A966F47000CE09D /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE792A966F47000CE09D /* Double+Extensions.swift */; };
-		FA37DE7C2A96A2DD000CE09D /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE7B2A96A2DD000CE09D /* FilterTableViewCell.swift */; };
+		FA37DE7C2A96A2DD000CE09D /* SorterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE7B2A96A2DD000CE09D /* SorterTableViewCell.swift */; };
 		FA37DE7F2A96BCE9000CE09D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE7E2A96BCE9000CE09D /* Enums.swift */; };
 		FA37DE822A97536C000CE09D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE812A97536C000CE09D /* APIService.swift */; };
 		FA37DE842A976560000CE09D /* NetworkingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE832A976560000CE09D /* NetworkingEnums.swift */; };
+		FA37DE8E2A988EE3000CE09D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE8D2A988EE3000CE09D /* UIViewController+Extensions.swift */; };
 		FAE1C7522A9555CB0005B011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7512A9555CB0005B011 /* AppDelegate.swift */; };
 		FAE1C7542A9555CB0005B011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */; };
 		FAE1C7562A9555CB0005B011 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7552A9555CB0005B011 /* MainPageViewController.swift */; };
@@ -38,10 +39,11 @@
 		FA37DE752A9657DC000CE09D /* CoinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDataModel.swift; sourceTree = "<group>"; };
 		FA37DE772A9662AB000CE09D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		FA37DE792A966F47000CE09D /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
-		FA37DE7B2A96A2DD000CE09D /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		FA37DE7B2A96A2DD000CE09D /* SorterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorterTableViewCell.swift; sourceTree = "<group>"; };
 		FA37DE7E2A96BCE9000CE09D /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		FA37DE812A97536C000CE09D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		FA37DE832A976560000CE09D /* NetworkingEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingEnums.swift; sourceTree = "<group>"; };
+		FA37DE8D2A988EE3000CE09D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		FAE1C74E2A9555CB0005B011 /* cryptoCurrencyApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoCurrencyApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE1C7512A9555CB0005B011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,25 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		FA37DE8F2A989443000CE09D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FAE1C75C2A9555D00005B011 /* LaunchScreen.storyboard */,
+				FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */,
+				FAE1C7512A9555CB0005B011 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FA37DE902A98947C000CE09D /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				FAE1C7752A955BAA0005B011 /* MainPage */,
+				FAE1C77C2A9560980005B011 /* DetailPage */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		FAE1C7452A9555CB0005B011 = {
 			isa = PBXGroup;
 			children = (
@@ -136,17 +157,13 @@
 		FAE1C7502A9555CB0005B011 /* cryptoCurrencyApplication */ = {
 			isa = PBXGroup;
 			children = (
+				FA37DE8F2A989443000CE09D /* App */,
 				FA37DE802A975352000CE09D /* Networking */,
+				FA37DE902A98947C000CE09D /* Modules */,
 				FA37DE7D2A96BC52000CE09D /* Enums */,
 				FA37DE742A9657C8000CE09D /* Models */,
-				FAE1C77C2A9560980005B011 /* DetailPage */,
-				FAE1C7752A955BAA0005B011 /* MainPage */,
-				FAE1C76F2A9558A40005B011 /* Interactor */,
 				FAE1C7652A9556FC0005B011 /* Extensions */,
-				FAE1C7512A9555CB0005B011 /* AppDelegate.swift */,
-				FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */,
 				FAE1C75A2A9555D00005B011 /* Assets.xcassets */,
-				FAE1C75C2A9555D00005B011 /* LaunchScreen.storyboard */,
 				FAE1C75F2A9555D00005B011 /* Info.plist */,
 			);
 			path = cryptoCurrencyApplication;
@@ -158,16 +175,9 @@
 				FAE1C7662A95570A0005B011 /* UIColor+Extensions.swift */,
 				FA37DE772A9662AB000CE09D /* String+Extensions.swift */,
 				FA37DE792A966F47000CE09D /* Double+Extensions.swift */,
+				FA37DE8D2A988EE3000CE09D /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		FAE1C76F2A9558A40005B011 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C7732A9559C40005B011 /* FetchCoinDataInteractor.swift */,
-			);
-			path = Interactor;
 			sourceTree = "<group>";
 		};
 		FAE1C7702A9558B00005B011 /* Entity */ = {
@@ -182,11 +192,12 @@
 		FAE1C7752A955BAA0005B011 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				FAE1C7732A9559C40005B011 /* FetchCoinDataInteractor.swift */,
 				FAE1C7552A9555CB0005B011 /* MainPageViewController.swift */,
 				FAE1C7682A95572F0005B011 /* RankingListTableViewCell.swift */,
 				FAE1C7782A955BE90005B011 /* MainPagePresenter.swift */,
 				FAE1C77A2A955BFB0005B011 /* MainPageRouter.swift */,
-				FA37DE7B2A96A2DD000CE09D /* FilterTableViewCell.swift */,
+				FA37DE7B2A96A2DD000CE09D /* SorterTableViewCell.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -331,10 +342,11 @@
 				FA37DE782A9662AB000CE09D /* String+Extensions.swift in Sources */,
 				FA37DE842A976560000CE09D /* NetworkingEnums.swift in Sources */,
 				FA37DE7A2A966F47000CE09D /* Double+Extensions.swift in Sources */,
+				FA37DE8E2A988EE3000CE09D /* UIViewController+Extensions.swift in Sources */,
 				FAE1C7742A9559C40005B011 /* FetchCoinDataInteractor.swift in Sources */,
 				FAE1C7792A955BE90005B011 /* MainPagePresenter.swift in Sources */,
 				FAE1C7672A95570A0005B011 /* UIColor+Extensions.swift in Sources */,
-				FA37DE7C2A96A2DD000CE09D /* FilterTableViewCell.swift in Sources */,
+				FA37DE7C2A96A2DD000CE09D /* SorterTableViewCell.swift in Sources */,
 				FAE1C7722A9558D80005B011 /* CryptoResponse.swift in Sources */,
 				FA37DE822A97536C000CE09D /* APIService.swift in Sources */,
 				FAE1C7692A95572F0005B011 /* RankingListTableViewCell.swift in Sources */,

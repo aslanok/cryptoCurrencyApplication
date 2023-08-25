@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FilterOption : String, CaseIterable{
+enum SorterOption : String, CaseIterable{
     case marketCap = "MarketCap"
     case price = "Price"
     case volume24h = "24h Vol"

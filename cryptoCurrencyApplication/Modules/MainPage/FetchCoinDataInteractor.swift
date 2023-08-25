@@ -21,6 +21,7 @@ class FetchCoinDataInteractor : FetchCoinDataInteractorInput{
     internal var output : FetchCoinDataInteractorOutput?
     
     let endpointURL = "https://psp-merchantpanel-service-sandbox.ozanodeme.com.tr/api/v1/dummy/coins"
+    
     func execute() {
         APIService.shared.request( endpointURL, type: CryptoResponse.self) { result in
             switch result{

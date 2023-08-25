@@ -116,10 +116,8 @@ class RankingListTableViewCell : UITableViewCell {
         self.assetPriceLabel.text = "$"+coin.getFormattedPrice()
         if coin.change.first == "-"{
             assetPriceChangeLabel.textColor = .Theme.failRedColor
-            //assetPriceChangeLabel.text = coin.change + "% (-$\(coin.getCalculatedChangedPrice().formatWithCommas()))"
         } else {
             assetPriceChangeLabel.textColor = .Theme.successGreenColor
-            //assetPriceChangeLabel.text = "+"+coin.change+"% (+$\(coin.getCalculatedChangedPrice().formatWithCommas()))"
         }
         assetPriceChangeLabel.text = coin.getChangePercentQuantity()
     }
