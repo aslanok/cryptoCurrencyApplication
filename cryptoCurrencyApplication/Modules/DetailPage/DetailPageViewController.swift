@@ -75,6 +75,7 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         
         let data = LineChartData(dataSet: dataSet)
         chartView.data = data
+        chartView.animate(xAxisDuration: 0.8)
         
         return chartView
     }()
