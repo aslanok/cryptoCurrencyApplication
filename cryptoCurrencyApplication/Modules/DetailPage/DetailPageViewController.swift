@@ -202,6 +202,15 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
     }()
     
     
+    private lazy var listedDateLable : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Listed At: \(_coin.getDate())"
+        label.textColor = .Theme.navyBlueTextColor
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return label
+    }()
+    
     init(coin : CoinDataModel){
         self._coin = coin
         super.init(nibName: nil, bundle: nil)
@@ -232,6 +241,10 @@ class DetailPageViewController : UIViewController, DetailPageViewContract{
         view.addSubview(currentPriceLabel)
         currentPriceLabel.topAnchor.constraint(equalTo: fullNameTitleLabel.bottomAnchor, constant: 50).isActive = true
         currentPriceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        
+        view.addSubview(listedDateLable)
+        listedDateLable.centerYAnchor.constraint(equalTo: currentPriceLabel.centerYAnchor).isActive = true
+        listedDateLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         
         view.addSubview(coinPriceLabel)
         coinPriceLabel.topAnchor.constraint(equalTo: currentPriceLabel.bottomAnchor, constant: 10).isActive = true

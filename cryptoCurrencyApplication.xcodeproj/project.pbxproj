@@ -16,6 +16,7 @@
 		FA37DE822A97536C000CE09D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE812A97536C000CE09D /* APIService.swift */; };
 		FA37DE842A976560000CE09D /* NetworkingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE832A976560000CE09D /* NetworkingEnums.swift */; };
 		FA37DE8E2A988EE3000CE09D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DE8D2A988EE3000CE09D /* UIViewController+Extensions.swift */; };
+		FA37DEA32A98F32B000CE09D /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37DEA22A98F32A000CE09D /* Int+Extensions.swift */; };
 		FAE1C7522A9555CB0005B011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7512A9555CB0005B011 /* AppDelegate.swift */; };
 		FAE1C7542A9555CB0005B011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */; };
 		FAE1C7562A9555CB0005B011 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C7552A9555CB0005B011 /* MainPageViewController.swift */; };
@@ -44,6 +45,7 @@
 		FA37DE812A97536C000CE09D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		FA37DE832A976560000CE09D /* NetworkingEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingEnums.swift; sourceTree = "<group>"; };
 		FA37DE8D2A988EE3000CE09D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		FA37DEA22A98F32A000CE09D /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		FAE1C74E2A9555CB0005B011 /* cryptoCurrencyApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoCurrencyApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE1C7512A9555CB0005B011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAE1C7532A9555CB0005B011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				FA37DE772A9662AB000CE09D /* String+Extensions.swift */,
 				FA37DE792A966F47000CE09D /* Double+Extensions.swift */,
 				FA37DE8D2A988EE3000CE09D /* UIViewController+Extensions.swift */,
+				FA37DEA22A98F32A000CE09D /* Int+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				FAE1C7672A95570A0005B011 /* UIColor+Extensions.swift in Sources */,
 				FA37DE7C2A96A2DD000CE09D /* SorterTableViewCell.swift in Sources */,
 				FAE1C7722A9558D80005B011 /* CryptoResponse.swift in Sources */,
+				FA37DEA32A98F32B000CE09D /* Int+Extensions.swift in Sources */,
 				FA37DE822A97536C000CE09D /* APIService.swift in Sources */,
 				FAE1C7692A95572F0005B011 /* RankingListTableViewCell.swift in Sources */,
 			);

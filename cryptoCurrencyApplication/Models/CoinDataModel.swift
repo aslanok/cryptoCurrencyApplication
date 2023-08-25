@@ -94,4 +94,8 @@ class CoinDataModel{
         }
     }
     
+    func getDate() -> String {
+        return listedAt.toDateFormat()
+    }
+    
 }

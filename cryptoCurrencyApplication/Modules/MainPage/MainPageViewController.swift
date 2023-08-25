@@ -47,6 +47,14 @@ class MainPageViewController: UIViewController, MainPageViewContract {
         return button
     }()
 
+    private lazy var sortImageView : UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "down-arrow-icon"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
     private lazy var sortersTableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +87,7 @@ class MainPageViewController: UIViewController, MainPageViewContract {
         rankingListTableView.dataSource = self
         sortersTableView.dataSource = self
         sortersTableView.delegate = self
-        sortersTableView.isHidden = true
+        sortersTableView.isHidden = true        
     }
 
     func setupView(){
@@ -100,6 +108,12 @@ class MainPageViewController: UIViewController, MainPageViewContract {
         sortButton.centerXAnchor.constraint(equalTo: sortingAreaBackgroundView.centerXAnchor).isActive = true
         sortButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         sortButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        view.addSubview(sortImageView)
+        sortImageView.centerYAnchor.constraint(equalTo: sortButton.centerYAnchor, constant: -2).isActive = true
+        sortImageView.leadingAnchor.constraint(equalTo: sortButton.trailingAnchor, constant: -2).isActive = true
+        sortImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        sortImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
 
         view.addSubview(rankingListTableView)
         rankingListTableView.topAnchor.constraint(equalTo: rankingListLabel.bottomAnchor, constant: 10).isActive = true
@@ -141,10 +155,12 @@ class MainPageViewController: UIViewController, MainPageViewContract {
         if toogle {
             UIView.animate(withDuration: 0.3) {
                 self.sortersTableView.isHidden = false
+                self.sortImageView.image = UIImage(named: "up-arrow-icon")
             }
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.sortersTableView.isHidden = true
+                self.sortImageView.image = UIImage(named: "down-arrow-icon")
             }
         }
     }
